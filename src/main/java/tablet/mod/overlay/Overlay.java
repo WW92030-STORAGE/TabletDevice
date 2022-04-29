@@ -86,7 +86,7 @@ public class Overlay {
 			for (int i = x1; i <= x2; i++) {
 				for (int j = z1; j <= z2; j++) {
 					IBlockState b1 = ib(world, i, floor(y), j);
-					IBlockState b2 = ib(world, j, floor(y + 1), j);
+					IBlockState b2 = ib(world, i, floor(y + 1), j);
 					if (b1.getMaterial().isSolid() || b2.getMaterial().isSolid()) blocks.add(new pair(i, j));
 				}	
 			}
