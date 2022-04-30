@@ -3,7 +3,6 @@ package tablet.mod.overlay;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -18,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tablet.mod.init.BlockInit;
 import tablet.mod.items.Tablet;
 import tablet.mod.util.Reference;
 import tablet.mod.util.pair;
@@ -83,11 +83,13 @@ public class Overlay {
 			
 			HashSet<pair> blocks = new HashSet<pair>();
 			HashSet<Vec3d> entities = new HashSet<Vec3d>();
+			HashSet<pair> shards = new HashSet<pair>();
 			for (int i = x1; i <= x2; i++) {
 				for (int j = z1; j <= z2; j++) {
 					IBlockState b1 = ib(world, i, floor(y), j);
 					IBlockState b2 = ib(world, i, floor(y + 1), j);
 					if (b1.getMaterial().isSolid() || b2.getMaterial().isSolid()) blocks.add(new pair(i, j));
+					if (b1.getBlock() == BlockInit.SHARD || b2.getBlock() == BlockInit.SHARD) shards.add(new pair(i, j));
 				}	
 			}
 			
@@ -131,6 +133,23 @@ public class Overlay {
 				opacity = (int)(255.0 * Math.max(0, depth - opacity) / depth);
 				
 				this.rect(entity, floor(v.x), floor(v.z), 1, 1, 0xFF0000, opacity);
+			}
+			
+			for (pair p : shards) {
+				 Vec3d v = new Vec3d(p.x + 0.5, 0, p.y + 0.5).subtract(entity.getPositionVector());
+				 v = v.rotateYaw(-1 * dir(entity));
+				 v = v.add(new Vec3d(radius, 0, radius));
+				 if (v.x < 0 || v.x >= size) continue;
+				 if (v.z < 0 || v.z >= size) continue;
+				 
+				 /*
+				 IBlockState ibs = ib(world, p.x, y, p.y);
+				 MapColor mc = ibs.getMapColor(world, new BlockPos(v.x, y, v.z));
+				 if (Reference.rareRNG()) System.out.println(mc.colorValue);
+				 this.rect(entity, floor(v.x), floor(v.z), 1, 1, mc.colorValue % (1<<24), 255);
+				 */
+				 
+				 this.rect(entity, floor(v.x), floor(v.z), 1, 1, 0x7F00FF, 255);
 			}
 			
 			this.rect(entity, radius, radius, 1, 1, 0x00FFFF, 255);

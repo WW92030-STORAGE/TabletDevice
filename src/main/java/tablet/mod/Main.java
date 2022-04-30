@@ -31,8 +31,6 @@ public class Main
 	public static void init(FMLInitializationEvent event) {
 		RegistryHandler.InitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(new Overlay());
-		
-		Reference.initData();
 	}
 	
 	@EventHandler
