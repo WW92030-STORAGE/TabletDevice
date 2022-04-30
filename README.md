@@ -1,2 +1,2 @@
 # TabletDevice
-Dark Deception-esque minimap device.
+[MINECRAFT 1.12] Dark Deception-esque minimap device.
