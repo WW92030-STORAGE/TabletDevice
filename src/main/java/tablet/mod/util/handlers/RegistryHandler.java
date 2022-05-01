@@ -7,7 +7,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tablet.mod.commands.CommandResetShards;
 import tablet.mod.init.BlockInit;
 import tablet.mod.init.ItemInit;
 import tablet.mod.util.IModel;
@@ -47,4 +49,9 @@ public class RegistryHandler {
 		// EntityInit.registerEntities();
 		// RenderHandler.registerEntityRenders();
 	}
+	
+	public static void serverRegistries(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandResetShards());
+	}	
 }

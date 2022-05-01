@@ -1,11 +1,11 @@
 package tablet.mod.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLever;
+import net.minecraft.command.server.CommandTestForBlock;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.text.TextComponentString;
 
 public class Reference {
 	public static final String MODID = "tablet";
@@ -21,4 +21,17 @@ public class Reference {
 	public static String id(EntityPlayer ep) {
 		return ep.getUUID(ep.getGameProfile()).toString();
 	}
+	
+	public static void send(EntityPlayer e, String s) {
+		e.sendStatusMessage(new TextComponentString(s), false);
+	}
+	
+	CommandTestForBlock x = new CommandTestForBlock();
+	BlockLever x2;
+	Block b = Blocks.REDSTONE_BLOCK;
+	Block b2 = Blocks.REDSTONE_LAMP;
+	
+	int dx[] = {01, 00, 00, -1, 00, 00};
+	int dy[] = {00, 01, 00, 00, -1, 00};
+	int dz[] = {00, 00, 01, 00, 00, -1};
 }

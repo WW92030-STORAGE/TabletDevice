@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import tablet.mod.overlay.Overlay;
 import tablet.mod.proxy.CommonProxy;
 import tablet.mod.util.Reference;
@@ -35,5 +36,12 @@ public class Main
 	
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
+		
+	}
+	
+	@EventHandler
+	public static void serverInit(FMLServerStartingEvent event)
+	{
+		RegistryHandler.serverRegistries(event);
 	}
 }
